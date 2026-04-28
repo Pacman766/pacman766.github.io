@@ -666,7 +666,7 @@ em { font-style: italic; }
       return;
     }
     var scale = window.innerWidth / page.offsetWidth;
-    page.style.transformOrigin = 'top left';
+    page.style.transformOrigin = 'top center';
     page.style.transform = 'scale(' + scale + ')';
     page.style.marginBottom = '-' + (page.offsetHeight * (1 - scale)) + 'px';
   }

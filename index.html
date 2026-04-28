@@ -192,9 +192,18 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
 .mobile-nav-cta:hover { background: oklch(0.22 0.01 60); color: var(--bg) !important; }
 .mobile-nav .lang-switch { margin-top: 4px; }
 .mobile-nav .lang-btn { font-size: 13px; padding: 6px 8px; }
+.mobile-nav-close {
+  position: absolute; top: 20px; right: 20px;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: none; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink); transition: background .2s ease;
+}
+.mobile-nav-close:hover { background: var(--bg-2); }
 
 @media (max-width: 720px) {
   .nav-links { display: none; }
+  .nav-cta { display: none; }
   .nav-burger { display: flex; }
   .topnav .lang-switch { display: none; }
 }
@@ -756,6 +765,9 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
 </header>
 
 <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+  <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
   <a href="#about" data-i18n="navAbout">About</a>
   <a href="#skills" data-i18n="navSkills">Skills</a>
   <a href="#experience" data-i18n="navExperience">Experience</a>
@@ -898,6 +910,8 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
   overlay.querySelectorAll('a').forEach(function (a) {
     a.addEventListener('click', closeMenu);
   });
+  var closeBtn = document.getElementById('mobile-nav-close');
+  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') closeMenu();
   });
