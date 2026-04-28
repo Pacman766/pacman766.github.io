@@ -318,6 +318,13 @@ em { font-style: italic; }
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
+.btn-short { display: none; }
+@media (max-width: 600px) {
+  .btn-long { display: none; }
+  .btn-short { display: inline; }
+  .toolbar-left { display: none; }
+}
+
 /* ============= PRINT ============= */
 @page {
   size: A4;
@@ -361,7 +368,8 @@ em { font-style: italic; }
     </a>
     <button class="tb-btn tb-btn-primary" id="print-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-      Print / Save as PDF
+      <span class="btn-long">Print / Save as PDF</span>
+      <span class="btn-short">Save as PDF</span>
     </button>
   </div>
 </div>
@@ -516,12 +524,16 @@ em { font-style: italic; }
     return body.split('\n').filter((l) => /^-\s/.test(l)).map((l) => l.replace(/^-\s+/, '').trim());
   }
 
-  fetch('content.md', { cache: 'no-cache' })
+  var _lang = new URLSearchParams(location.search).get('lang') || localStorage.getItem('cv-lang') || 'en';
+  if (_lang !== 'en' && _lang !== 'ru') _lang = 'en';
+  var _contentFile = _lang === 'ru' ? 'content-ru.md' : 'content.md';
+
+  fetch(_contentFile, { cache: 'no-cache' })
     .then((r) => r.text())
     .then(render)
     .catch((err) => {
       console.error(err);
-      document.getElementById('cms-loader').textContent = 'Failed to load content.md';
+      document.getElementById('cms-loader').textContent = 'Failed to load content';
     });
 
   function render(text) {
@@ -624,6 +636,24 @@ em { font-style: italic; }
   }
 
   document.getElementById('print-btn').addEventListener('click', () => window.print());
+
+  // Mobile: scale A4 page to fit viewport
+  function scaleResumePage() {
+    var page = document.querySelector('.page');
+    var wrap = document.querySelector('.page-wrap');
+    if (!page || !wrap) return;
+    if (window.innerWidth >= 760) {
+      page.style.transform = '';
+      page.style.marginBottom = '';
+      return;
+    }
+    var scale = window.innerWidth / page.offsetWidth;
+    page.style.transformOrigin = 'top left';
+    page.style.transform = 'scale(' + scale + ')';
+    page.style.marginBottom = '-' + (page.offsetHeight * (1 - scale)) + 'px';
+  }
+  window.addEventListener('resize', scaleResumePage);
+  scaleResumePage();
 })();
 </script>
 </body>

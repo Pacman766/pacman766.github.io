@@ -119,6 +119,19 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
   transition: transform .25s ease, background .25s ease;
 }
 .nav-cta:hover { transform: translateY(-1px); background: oklch(0.20 0.01 60); }
+.lang-switch {
+  display: flex; align-items: center; gap: 2px;
+  font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
+}
+.lang-btn {
+  background: none; border: none; cursor: pointer;
+  color: var(--ink-3); font: inherit; letter-spacing: inherit;
+  padding: 4px 5px; transition: color .2s ease;
+}
+.lang-btn.active { color: var(--ink); font-weight: 600; }
+.lang-btn:hover { color: var(--ink); }
+.lang-sep { color: var(--line-2); pointer-events: none; }
+
 .nav-burger {
   display: none;
   flex-direction: column;
@@ -127,7 +140,8 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
   border: none;
   cursor: pointer;
   padding: 6px 4px;
-  z-index: 60;
+  position: relative;
+  z-index: 210;
 }
 .nav-burger span {
   display: block;
@@ -141,21 +155,48 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
 .nav-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 .nav-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
+/* ============= MOBILE NAV OVERLAY ============= */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--bg);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+  font-family: var(--display);
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  transition: color .2s ease;
+}
+.mobile-nav a:hover { color: var(--ink-2); }
+.mobile-nav-divider {
+  width: 40px; height: 1px; background: var(--line);
+}
+.mobile-nav-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 20px; border-radius: 999px;
+  background: var(--ink); color: var(--bg) !important;
+  font-family: var(--sans) !important;
+  font-size: 14px !important; font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  transition: background .25s ease;
+}
+.mobile-nav-cta:hover { background: oklch(0.22 0.01 60); color: var(--bg) !important; }
+.mobile-nav .lang-switch { margin-top: 4px; }
+.mobile-nav .lang-btn { font-size: 13px; padding: 6px 8px; }
+
 @media (max-width: 720px) {
   .nav-links { display: none; }
-  .nav-links.open {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    inset: 0;
-    background: var(--bg);
-    z-index: 55;
-    align-items: center;
-    justify-content: center;
-    gap: 36px;
-  }
-  .nav-links.open a { font-size: 22px; color: var(--ink); }
   .nav-burger { display: flex; }
+  .topnav .lang-switch { display: none; }
 }
 
 /* ============= REVEAL ============= */
@@ -686,14 +727,37 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
     <a href="#projects">Projects</a>
     <a href="#contact">Contact</a>
   </nav>
-  <button class="nav-burger" id="nav-burger" aria-label="Toggle menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="lang-switch" id="lang-switch-top">
+    <button class="lang-btn" data-lang="en">EN</button>
+    <span class="lang-sep">·</span>
+    <button class="lang-btn" data-lang="ru">RU</button>
+  </div>
   <a class="nav-cta" data-bind-attr="href:profile.cvFile" href="resume.html">
     Download CV
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
   </a>
+  <button class="nav-burger" id="nav-burger" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </header>
+
+<div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#experience">Experience</a>
+  <a href="#projects">Projects</a>
+  <a href="#contact">Contact</a>
+  <div class="mobile-nav-divider"></div>
+  <div class="lang-switch" id="lang-switch-mob">
+    <button class="lang-btn" data-lang="en">EN</button>
+    <span class="lang-sep">·</span>
+    <button class="lang-btn" data-lang="ru">RU</button>
+  </div>
+  <a class="mobile-nav-cta" id="mobile-nav-cta" href="resume.html">
+    Download CV
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+  </a>
+</div>
 
 <main id="top">
 
@@ -798,17 +862,30 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
 <script>
 (function () {
   var burger = document.getElementById('nav-burger');
-  var navLinks = document.querySelector('.nav-links');
-  if (!burger || !navLinks) return;
+  var overlay = document.getElementById('mobile-nav');
+  if (!burger || !overlay) return;
+
+  function openMenu() {
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    burger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
   burger.addEventListener('click', function () {
-    var open = navLinks.classList.toggle('open');
-    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    overlay.classList.contains('open') ? closeMenu() : openMenu();
   });
-  navLinks.querySelectorAll('a').forEach(function (a) {
-    a.addEventListener('click', function () {
-      navLinks.classList.remove('open');
-      burger.setAttribute('aria-expanded', 'false');
-    });
+  overlay.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', closeMenu);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeMenu();
   });
 })();
 </script>
@@ -931,14 +1008,39 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
     return body.split('\n').filter((l) => /^-\s/.test(l)).map((l) => l.replace(/^-\s+/, '').trim());
   }
 
+  // ============= LANG =============
+  var _lang = new URLSearchParams(location.search).get('lang') || localStorage.getItem('cv-lang') || 'en';
+  if (_lang !== 'en' && _lang !== 'ru') _lang = 'en';
+  var _contentFile = _lang === 'ru' ? 'content-ru.md' : 'content.md';
+
+  function initLangSwitch() {
+    document.querySelectorAll('.lang-btn').forEach(function (btn) {
+      if (btn.dataset.lang === _lang) btn.classList.add('active');
+      btn.addEventListener('click', function () {
+        var lang = btn.dataset.lang;
+        localStorage.setItem('cv-lang', lang);
+        var url = new URL(location.href);
+        if (lang === 'en') url.searchParams.delete('lang');
+        else url.searchParams.set('lang', lang);
+        location.href = url.toString();
+      });
+    });
+    // Update mobile nav Download CV href to match lang
+    var mobileNavCta = document.getElementById('mobile-nav-cta');
+    if (mobileNavCta) {
+      var cvHref = _lang === 'ru' ? 'resume.html?lang=ru' : 'resume.html';
+      mobileNavCta.href = cvHref;
+    }
+  }
+
   // ============= LOAD =============
-  fetch('content.md', { cache: 'no-cache' })
+  fetch(_contentFile, { cache: 'no-cache' })
     .then((r) => r.text())
     .then((text) => render(text))
     .catch((err) => {
-      console.error('Failed to load content.md', err);
+      console.error('Failed to load ' + _contentFile, err);
       document.getElementById('cms-loader').innerHTML =
-        '<div class="cms-loader-inner"><div>Failed to load content.md</div></div>';
+        '<div class="cms-loader-inner"><div>Failed to load content</div></div>';
     });
 
   function render(text) {
@@ -1135,7 +1237,8 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
       }
     }
 
-    // ---- Init reveal + sticky nav ----
+    // ---- Init lang switch + reveal + sticky nav ----
+    initLangSwitch();
     initInteractions();
     requestAnimationFrame(() => {
       document.getElementById('cms-loader').classList.add('hide');
