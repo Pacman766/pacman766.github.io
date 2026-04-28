@@ -1,0 +1,678 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Resume — Viktor Kondratsiuk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --ink: #18120c;
+  --ink-2: #3a3530;
+  --ink-3: #6e665d;
+  --line: #d8d2c5;
+  --line-2: #ece7dc;
+  --paper: #ffffff;
+  --accent: oklch(0.55 0.12 60);
+  --display: "Bricolage Grotesque", sans-serif;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #e8e4dc; }
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  font-size: 10.5pt;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+
+/* ============= TOOLBAR ============= */
+.toolbar {
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(232, 228, 220, 0.92);
+  backdrop-filter: saturate(160%) blur(10px);
+  -webkit-backdrop-filter: saturate(160%) blur(10px);
+  padding: 14px 24px;
+  display: flex; flex-wrap: nowrap; justify-content: space-between; align-items: center; gap: 16px;
+  border-bottom: 1px solid var(--line);
+}
+.toolbar-left {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--ink-3); letter-spacing: .04em;
+  flex: 1 1 0; min-width: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.toolbar-left strong { color: var(--ink); font-weight: 600; }
+.toolbar-actions { display: flex; gap: 10px; flex-shrink: 0; }
+.tb-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 16px;
+  font-family: var(--sans); font-size: 13px; font-weight: 500;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform .2s ease, background .2s ease, border-color .2s ease;
+  background: transparent; color: var(--ink);
+}
+.tb-btn:hover { transform: translateY(-1px); }
+.tb-btn-primary { background: var(--ink); color: var(--paper); }
+.tb-btn-primary:hover { background: oklch(0.22 0.01 60); }
+.tb-btn-ghost { border-color: var(--ink-3); }
+.tb-btn-ghost:hover { border-color: var(--ink); }
+.tb-btn svg { width: 14px; height: 14px; }
+
+/* ============= PAGE ============= */
+.page-wrap {
+  padding: 32px 16px 48px;
+  display: flex; flex-direction: column; align-items: center; gap: 24px;
+}
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  background: var(--paper);
+  padding: 18mm 16mm;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 12px 40px -8px rgba(0,0,0,.12);
+  position: relative;
+  page-break-after: always;
+}
+.page:last-child { page-break-after: auto; }
+
+/* ============= HEADER ============= */
+.r-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 24px;
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+  border-bottom: 1.5px solid var(--ink);
+}
+.r-head-left h1 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 32pt;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: var(--ink);
+}
+.r-head-tag {
+  margin-top: 8px;
+  font-size: 10pt;
+  color: var(--ink-2);
+  letter-spacing: 0.01em;
+}
+.r-head-tag strong { color: var(--accent); font-weight: 600; }
+.r-head-right {
+  text-align: right;
+  font-family: var(--mono);
+  font-size: 8.5pt;
+  color: var(--ink-3);
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+.r-head-right .when { display: block; text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* ============= LAYOUT ============= */
+.r-grid {
+  display: grid;
+  grid-template-columns: 1fr 2.1fr;
+  gap: 12mm;
+}
+.r-col-left > section { margin-bottom: 14px; }
+.r-col-right > section { margin-bottom: 14px; }
+.r-col-right > section:last-child { margin-bottom: 0; }
+
+/* ============= SECTION HEADERS ============= */
+.r-h2 {
+  font-family: var(--mono);
+  font-size: 8.5pt;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* ============= LEFT COLUMN ============= */
+.contact-list { list-style: none; }
+.contact-list li {
+  font-size: 9.5pt;
+  margin-bottom: 5px;
+  color: var(--ink-2);
+  word-break: break-word;
+}
+.contact-list .label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 7.5pt;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 1px;
+}
+.contact-list .value { display: block; font-weight: 500; color: var(--ink); text-decoration: none; }
+.contact-list a.value:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+.skills-block { margin-bottom: 10px; }
+.skills-block h3 {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 9.5pt;
+  color: var(--ink);
+  margin-bottom: 4px;
+  letter-spacing: -0.005em;
+}
+.skills-block p {
+  font-size: 9pt;
+  color: var(--ink-2);
+  line-height: 1.45;
+}
+
+.lang-list, .edu-list { list-style: none; }
+.lang-list li, .edu-list li {
+  margin-bottom: 8px;
+  font-size: 9.5pt;
+}
+.lang-list .name { font-weight: 600; color: var(--ink); }
+.lang-list .level { display: block; font-size: 8.5pt; color: var(--ink-3); margin-top: 1px; }
+.edu-list .school { font-weight: 600; color: var(--ink); display: block; }
+.edu-list .degree { color: var(--ink-2); font-size: 9pt; }
+.edu-list .when { font-family: var(--mono); font-size: 7.5pt; color: var(--ink-3); letter-spacing: 0.06em; text-transform: uppercase; display: block; margin-top: 1px; }
+
+/* ============= RIGHT COLUMN ============= */
+.r-summary {
+  font-size: 10pt;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.r-role { margin-bottom: 14px; }
+.r-role:last-child { margin-bottom: 0; }
+.r-role-head {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap;
+  margin-bottom: 2px;
+}
+.r-role-title {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 11pt;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+.r-role-when {
+  font-family: var(--mono);
+  font-size: 8pt;
+  color: var(--ink-3);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.r-role-org {
+  font-size: 9.5pt;
+  color: var(--ink-2);
+  margin-bottom: 6px;
+  font-style: italic;
+}
+.r-role-stack {
+  display: inline-block;
+  font-family: var(--mono); font-size: 8pt;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+}
+.r-bullets {
+  list-style: none;
+  margin-top: 4px;
+}
+.r-bullets li {
+  position: relative;
+  padding-left: 12px;
+  font-size: 9.5pt;
+  color: var(--ink-2);
+  line-height: 1.5;
+  margin-bottom: 3px;
+}
+.r-bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 8px;
+  width: 6px; height: 1px;
+  background: var(--ink-3);
+}
+
+.r-project { margin-bottom: 10px; page-break-inside: avoid; break-inside: avoid; }
+.r-project:last-child { margin-bottom: 0; }
+.r-project-head {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap;
+  margin-bottom: 2px;
+}
+.r-project-title {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 10.5pt;
+  color: var(--ink);
+}
+.r-project-when {
+  font-family: var(--mono);
+  font-size: 8pt;
+  color: var(--ink-3);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.r-project-lead {
+  font-size: 9.5pt;
+  color: var(--ink-2);
+  line-height: 1.5;
+  margin-bottom: 5px;
+}
+.r-project-stack {
+  display: flex; flex-wrap: wrap; gap: 4px;
+  margin-top: 5px;
+}
+.r-project-stack span {
+  font-family: var(--mono);
+  font-size: 7.5pt;
+  padding: 2px 7px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--ink-2);
+}
+
+.r-foot {
+  margin-top: 16px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 7.5pt;
+  color: var(--ink-3);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ============= LOADER ============= */
+#cms-loader {
+  position: fixed; inset: 0; z-index: 100;
+  display: grid; place-items: center;
+  background: #e8e4dc;
+  font-family: var(--mono); font-size: 11px;
+  color: var(--ink-3); letter-spacing: .08em; text-transform: uppercase;
+  transition: opacity .4s ease;
+}
+#cms-loader.hide { opacity: 0; pointer-events: none; }
+#cms-loader::before {
+  content: ""; width: 24px; height: 24px;
+  border: 1.5px solid var(--line);
+  border-top-color: var(--ink);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  margin-bottom: 14px; display: block;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.btn-short { display: none; }
+@media (max-width: 600px) {
+  .btn-long { display: none; }
+  .btn-short { display: inline; }
+  .toolbar-left { display: none; }
+  body { overflow-x: hidden; }
+  .page-wrap { overflow-x: hidden; max-width: 100vw; padding: 16px 0 32px; }
+}
+
+/* ============= PRINT ============= */
+@page {
+  size: A4;
+  margin: 12mm 14mm;
+}
+@media print {
+  html, body { background: white; }
+  .toolbar, #cms-loader { display: none !important; }
+  .page-wrap { padding: 0; gap: 0; display: block; }
+  .page {
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    min-height: 0;
+    page-break-after: auto;
+  }
+  .r-head { page-break-after: avoid; break-after: avoid; }
+  .r-h2 { page-break-after: avoid; break-after: avoid; }
+  .r-role, .r-project, .skills-block, .edu-list li {
+    page-break-inside: avoid; break-inside: avoid;
+  }
+  .r-foot { display: none; }
+  /* tighten a bit for print */
+  body { font-size: 10pt; }
+  .r-head-left h1 { font-size: 28pt; }
+  .r-grid { gap: 10mm; }
+}
+</style>
+</head>
+<body>
+
+<div id="cms-loader">Loading…</div>
+
+<div class="toolbar">
+  <div class="toolbar-left"><span id="toolbar-hint">Resume preview · A4 · Choose <strong>"Save as PDF"</strong> as destination, then turn off <strong>"Headers and footers"</strong> in More settings</span></div>
+  <div class="toolbar-actions">
+    <a class="tb-btn tb-btn-ghost" href="index.html" id="back-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      <span data-i18n="backBtn">Back to site</span>
+    </a>
+    <button class="tb-btn tb-btn-primary" id="print-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      <span class="btn-long" data-i18n="printBtn">Print / Save as PDF</span>
+      <span class="btn-short" data-i18n="printBtnShort">Save as PDF</span>
+    </button>
+  </div>
+</div>
+
+<div class="page-wrap">
+  <article class="page" id="resume-root">
+    <header class="r-head">
+      <div class="r-head-left">
+        <h1 id="r-name">Viktor Kondratsiuk</h1>
+        <div class="r-head-tag" id="r-tag">Web Developer · <strong>4 years</strong> · JavaScript, TypeScript, React/Next.js, Vue</div>
+      </div>
+      <div class="r-head-right">
+        <span class="when" id="r-updated">Updated —</span>
+        <span id="r-location"></span>
+      </div>
+    </header>
+
+    <div class="r-grid">
+      <aside class="r-col-left">
+        <section>
+          <h2 class="r-h2">Contact</h2>
+          <ul class="contact-list" id="r-contacts"></ul>
+        </section>
+
+        <section>
+          <h2 class="r-h2">Skills</h2>
+          <div id="r-skills"></div>
+        </section>
+
+        <section>
+          <h2 class="r-h2">Languages</h2>
+          <ul class="lang-list" id="r-langs"></ul>
+        </section>
+
+        <section>
+          <h2 class="r-h2">Education</h2>
+          <ul class="edu-list" id="r-edu"></ul>
+        </section>
+      </aside>
+
+      <main class="r-col-right">
+        <section>
+          <h2 class="r-h2">Summary</h2>
+          <p class="r-summary" id="r-summary"></p>
+        </section>
+
+        <section>
+          <h2 class="r-h2">Experience</h2>
+          <div id="r-roles"></div>
+        </section>
+
+        <section>
+          <h2 class="r-h2">Selected Projects</h2>
+          <div id="r-projects"></div>
+        </section>
+      </main>
+    </div>
+
+    <div class="r-foot">
+      <span id="r-footer-name">Viktor Kondratsiuk</span>
+      <span>Page 1</span>
+    </div>
+  </article>
+</div>
+
+<script>
+(function () {
+  function inline(s) {
+    if (!s) return '';
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/\b_([^_]+)_\b/g, '<em>$1</em>')
+      .replace(/_([^_]+)_/g, '<em>$1</em>')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+  }
+
+  function parseFrontmatter(text) {
+    const m = text.match(/^---\n([\s\S]*?)\n---\n/);
+    if (!m) return { fm: {}, rest: text };
+    const fm = {};
+    m[1].split('\n').forEach((line) => {
+      if (!line.trim() || line.trim().startsWith('#')) return;
+      const idx = line.indexOf(':');
+      if (idx === -1) return;
+      const k = line.slice(0, idx).trim();
+      let v = line.slice(idx + 1).trim();
+      if (v === 'true') v = true;
+      else if (v === 'false') v = false;
+      fm[k] = v;
+    });
+    return { fm, rest: text.slice(m[0].length) };
+  }
+  function splitSections(text) {
+    const sections = {};
+    const parts = text.split(/^# /gm).slice(1);
+    parts.forEach((part) => {
+      const nl = part.indexOf('\n');
+      sections[part.slice(0, nl).trim()] = part.slice(nl + 1);
+    });
+    return sections;
+  }
+  function getSubsections(text) {
+    const subs = {};
+    const parts = text.split(/^## /gm).slice(1);
+    parts.forEach((part) => {
+      const nl = part.indexOf('\n');
+      subs[part.slice(0, nl).trim()] = part.slice(nl + 1).trim();
+    });
+    return subs;
+  }
+  function getH3Items(text) {
+    const items = [];
+    const parts = text.split(/^### /gm).slice(1);
+    parts.forEach((part) => {
+      const nl = part.indexOf('\n');
+      items.push({ title: part.slice(0, nl).trim(), body: part.slice(nl + 1).trim() });
+    });
+    return items;
+  }
+  function parseFieldsAndBullets(body) {
+    const lines = body.split('\n');
+    const fields = {};
+    let currentList = null;
+    lines.forEach((raw) => {
+      if (!raw.trim()) { currentList = null; return; }
+      if (/^\s{2,}-\s/.test(raw)) {
+        if (currentList) currentList.push(raw.replace(/^\s+-\s/, '').trim());
+        return;
+      }
+      const m = raw.match(/^-\s+([\w]+):\s*(.*)$/);
+      if (m) {
+        const key = m[1], val = m[2].trim();
+        if (val === '') {
+          fields[key] = []; currentList = fields[key];
+        } else {
+          if (key === 'chips' || key === 'stack') {
+            fields[key] = val.split(',').map((s) => s.trim()).filter(Boolean);
+          } else {
+            fields[key] = val === 'true' ? true : val === 'false' ? false : val;
+          }
+          currentList = null;
+        }
+      }
+    });
+    return fields;
+  }
+  function parseBulletList(body) {
+    return body.split('\n').filter((l) => /^-\s/.test(l)).map((l) => l.replace(/^-\s+/, '').trim());
+  }
+
+  var _lang = new URLSearchParams(location.search).get('lang') || localStorage.getItem('cv-lang') || 'en';
+  if (_lang !== 'en' && _lang !== 'ru') _lang = 'en';
+  var _contentFile = _lang === 'ru' ? 'content-ru.md' : 'content.md';
+
+  fetch(_contentFile, { cache: 'no-cache' })
+    .then((r) => r.text())
+    .then(render)
+    .catch((err) => {
+      console.error(err);
+      document.getElementById('cms-loader').textContent = 'Failed to load content';
+    });
+
+  function render(text) {
+    const { fm, rest } = parseFrontmatter(text);
+    const sections = splitSections(rest);
+
+    // Header
+    document.getElementById('r-name').textContent = fm.name || '';
+    document.getElementById('r-footer-name').textContent = fm.name || '';
+    const exp = getSubsections(sections['Experience'] || '');
+    const roles = getH3Items(exp['Roles'] || '');
+    const yearsTag = roles.length ? '<strong>4+ years</strong> · ' : '';
+    document.getElementById('r-tag').innerHTML = (fm.role || 'Web Developer') + ' · ' + yearsTag + 'JavaScript, TypeScript, React/Next.js, Vue';
+
+    const updated = new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+    document.getElementById('r-updated').textContent = 'Updated ' + updated;
+    document.getElementById('r-location').textContent = fm.location || '';
+
+    // Contacts
+    const contactRows = [];
+    if (fm.email) contactRows.push({ label: 'Email', value: fm.email, href: 'mailto:' + fm.email });
+    if (fm.phone) contactRows.push({ label: 'Phone', value: fm.phone, href: 'tel:' + String(fm.phone).replace(/\s|-/g, '') });
+    if (fm.telegram) contactRows.push({ label: 'Telegram', value: '@' + fm.telegram, href: 'https://t.me/' + fm.telegram });
+    if (fm.github) contactRows.push({ label: 'GitHub', value: 'github.com/' + fm.github, href: 'https://github.com/' + fm.github });
+    if (fm.linkedin) contactRows.push({ label: 'LinkedIn', value: 'in/' + fm.linkedin, href: 'https://www.linkedin.com/in/' + fm.linkedin + '/' });
+    document.getElementById('r-contacts').innerHTML = contactRows.map((c) => {
+      const isExt = /^https?:/.test(c.href);
+      const tgt = isExt ? ' target="_blank" rel="noopener noreferrer"' : '';
+      return `<li><span class="label">${c.label}</span><a class="value" href="${c.href}"${tgt}>${c.value}</a></li>`;
+    }).join('');
+
+    // Skills (compact: each group as h3 + paragraph)
+    const skillsSec = getSubsections(sections['Skills'] || '');
+    const skillGroups = getH3Items(skillsSec['Groups'] || '');
+    document.getElementById('r-skills').innerHTML = skillGroups.map((g) => {
+      const items = parseBulletList(g.body).join(', ');
+      return `<div class="skills-block"><h3>${inline(g.title)}</h3><p>${inline(items)}</p></div>`;
+    }).join('');
+
+    // Languages
+    const langsSec = getSubsections(sections['Languages'] || '');
+    const langItems = parseBulletList(langsSec['Items'] || '');
+    document.getElementById('r-langs').innerHTML = langItems.map((row) => {
+      const [name, level] = row.split('|').map((s) => s.trim());
+      return `<li><span class="name">${name}</span><span class="level">${level || ''}</span></li>`;
+    }).join('');
+
+    // Education
+    const eduSec = getSubsections(sections['Education'] || '');
+    const eduItems = getH3Items(eduSec['Items'] || '');
+    document.getElementById('r-edu').innerHTML = eduItems.map((e) => {
+      const f = parseFieldsAndBullets(e.body);
+      return `<li>
+        <span class="school">${inline(e.title)}</span>
+        <span class="degree">${inline(f.degree || '')}</span>
+        <span class="when">${f.when || ''}</span>
+      </li>`;
+    }).join('');
+
+    // Summary (use About lead)
+    const aboutSec = getSubsections(sections['About'] || '');
+    document.getElementById('r-summary').innerHTML = inline(aboutSec['Lead'] || '');
+
+    // Roles (chronological order — newest first; reverse content.md order)
+    const rolesSorted = [...roles].reverse();
+    document.getElementById('r-roles').innerHTML = rolesSorted.map((r) => {
+      const f = parseFieldsAndBullets(r.body);
+      const bullets = (f.bullets || []).slice(0, 3).map((b) => `<li>${inline(b)}</li>`).join('');
+      return `<div class="r-role">
+        <div class="r-role-head">
+          <span class="r-role-title">${inline(r.title)}</span>
+          <span class="r-role-when">${f.when || ''}</span>
+        </div>
+        <div class="r-role-org">${f.org || ''}</div>
+        ${f.stack ? `<div class="r-role-stack">${f.stack}</div>` : ''}
+        ${f.summary ? `<div style="font-size:9.5pt;color:var(--ink-2);margin-bottom:3px;">${inline(f.summary)}</div>` : ''}
+        ${bullets ? `<ul class="r-bullets">${bullets}</ul>` : ''}
+      </div>`;
+    }).join('');
+
+    // Projects
+    const projSec = getSubsections(sections['Projects'] || '');
+    const projects = getH3Items(projSec['Items'] || '');
+    document.getElementById('r-projects').innerHTML = projects.map((p) => {
+      const f = parseFieldsAndBullets(p.body);
+      const stack = (f.stack || []).map((s) => `<span>${s}</span>`).join('');
+      return `<div class="r-project">
+        <div class="r-project-head">
+          <span class="r-project-title">${inline(p.title)}</span>
+          <span class="r-project-when">${f.when || ''}</span>
+        </div>
+        <div class="r-project-lead">${inline(f.lead || '')}</div>
+        ${stack ? `<div class="r-project-stack">${stack}</div>` : ''}
+      </div>`;
+    }).join('');
+
+    // ---- UI strings ----
+    var uiSec = getSubsections(sections['UI'] || '');
+    var ui = {};
+    Object.keys(uiSec).forEach(function(sub) {
+      var fields = parseFieldsAndBullets(uiSec[sub]);
+      Object.assign(ui, fields);
+    });
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      if (ui[key] != null) el.textContent = String(ui[key]);
+    });
+    var hintEl = document.getElementById('toolbar-hint');
+    if (hintEl && ui.toolbarHint) hintEl.innerHTML = inline(String(ui.toolbarHint));
+
+    requestAnimationFrame(() => {
+      document.getElementById('cms-loader').classList.add('hide');
+    });
+  }
+
+  document.getElementById('print-btn').addEventListener('click', () => window.print());
+
+  // Mobile: scale A4 page to fit viewport
+  function scaleResumePage() {
+    var page = document.querySelector('.page');
+    var wrap = document.querySelector('.page-wrap');
+    if (!page || !wrap) return;
+    if (window.innerWidth >= 760) {
+      page.style.transform = '';
+      page.style.marginBottom = '';
+      return;
+    }
+    var scale = window.innerWidth / page.offsetWidth;
+    page.style.transformOrigin = 'top center';
+    page.style.transform = 'scale(' + scale + ')';
+    page.style.marginBottom = '-' + (page.offsetHeight * (1 - scale)) + 'px';
+  }
+  window.addEventListener('resize', scaleResumePage);
+  scaleResumePage();
+})();
+</script>
+</body>
+</html>
