@@ -195,6 +195,11 @@ The fastest way to reach me is email or Telegram. I usually reply within a day.
 
 ## Nav
 - downloadCV: Download CV
+- navAbout: About
+- navSkills: Skills
+- navExperience: Experience
+- navProjects: Projects
+- navContact: Contact
 
 ## Hero
 - ctaWork: See selected work

@@ -195,6 +195,11 @@ cvFile: resume.html?lang=ru
 
 ## Nav
 - downloadCV: Скачать резюме
+- navAbout: О себе
+- navSkills: Навыки
+- navExperience: Опыт
+- navProjects: Проекты
+- navContact: Контакты
 
 ## Hero
 - ctaWork: Смотреть проекты
