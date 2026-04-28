@@ -709,6 +709,20 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
   font-family: var(--mono); font-size: 12px;
   letter-spacing: .04em;
 }
+
+/* ============= SCROLL TO TOP ============= */
+.scroll-top {
+  position: fixed; right: 24px; bottom: 24px; z-index: 100;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--ink); color: var(--bg);
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transform: translateY(8px);
+  transition: opacity .3s ease, transform .3s ease, background .25s ease;
+  pointer-events: none;
+}
+.scroll-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.scroll-top:hover { background: oklch(0.22 0.01 60); transform: translateY(-2px); }
 </style>
 </head>
 <body>
@@ -733,7 +747,7 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
     <button class="lang-btn" data-lang="ru">RU</button>
   </div>
   <a class="nav-cta" data-bind-attr="href:profile.cvFile" href="resume.html">
-    Download CV
+    <span data-i18n="downloadCV">Download CV</span>
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
   </a>
   <button class="nav-burger" id="nav-burger" aria-label="Toggle menu" aria-expanded="false">
@@ -754,7 +768,7 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
     <button class="lang-btn" data-lang="ru">RU</button>
   </div>
   <a class="mobile-nav-cta" id="mobile-nav-cta" href="resume.html">
-    Download CV
+    <span data-i18n="downloadCV">Download CV</span>
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
   </a>
 </div>
@@ -770,10 +784,10 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
     <h1 class="hero-title" id="hero-title-slot"></h1>
     <p class="hero-sub reveal" id="hero-sub-slot"></p>
     <div class="hero-actions reveal">
-      <a class="btn btn-primary" href="#projects">See selected work
+      <a class="btn btn-primary" href="#projects"><span data-i18n="ctaWork">See selected work</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
-      <a class="btn btn-ghost" data-bind-attr="href:profile.emailHref">Get in touch</a>
+      <a class="btn btn-ghost" data-bind-attr="href:profile.emailHref" data-i18n="ctaContact">Get in touch</a>
     </div>
     <div class="hero-portrait">
       <div class="portrait" id="portrait-slot">
@@ -788,7 +802,7 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
 
 <section class="section" id="about" data-screen-label="02 About">
   <div class="section-head">
-    <span class="kicker">01 — About</span>
+    <span class="kicker" data-i18n="kickerAbout">01 — About</span>
     <h2 class="section-title" id="about-heading"></h2>
   </div>
   <div class="about-grid">
@@ -799,7 +813,7 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
 
 <section class="section section-skills" id="skills" data-screen-label="03 Skills">
   <div class="section-head">
-    <span class="kicker">02 — Skills</span>
+    <span class="kicker" data-i18n="kickerSkills">02 — Skills</span>
     <h2 class="section-title" id="skills-heading"></h2>
     <p class="section-sub" id="skills-sub"></p>
   </div>
@@ -808,7 +822,7 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
 
 <section class="section" id="experience" data-screen-label="04 Experience">
   <div class="section-head">
-    <span class="kicker">03 — Experience</span>
+    <span class="kicker" data-i18n="kickerExperience">03 — Experience</span>
     <h2 class="section-title" id="experience-heading"></h2>
   </div>
   <ol class="timeline" id="experience-list"></ol>
@@ -816,7 +830,7 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
 
 <section class="section section-projects" id="projects" data-screen-label="05 Projects">
   <div class="section-head">
-    <span class="kicker">04 — Selected projects</span>
+    <span class="kicker" data-i18n="kickerProjects">04 — Selected projects</span>
     <h2 class="section-title" id="projects-heading"></h2>
   </div>
   <div id="projects-list"></div>
@@ -825,13 +839,13 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
 <section class="section section-edu" id="education" data-screen-label="06 Education">
   <div class="edu-grid">
     <div class="edu-block reveal">
-      <span class="kicker">05 — Education</span>
-      <h2 class="section-title">Education.</h2>
+      <span class="kicker" data-i18n="kickerEducation">05 — Education</span>
+      <h2 class="section-title" data-i18n="educationTitle">Education.</h2>
       <div id="education-list"></div>
     </div>
     <div class="edu-block reveal">
-      <span class="kicker">06 — Languages</span>
-      <h2 class="section-title">Languages.</h2>
+      <span class="kicker" data-i18n="kickerLanguages">06 — Languages</span>
+      <h2 class="section-title" data-i18n="languagesTitle">Languages.</h2>
       <ul class="lang-list" id="languages-list"></ul>
     </div>
   </div>
@@ -839,13 +853,13 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
 
 <section class="section section-contact" id="contact" data-screen-label="07 Contact">
   <div class="contact-inner">
-    <span class="kicker">07 — Contact</span>
+    <span class="kicker" data-i18n="kickerContact">07 — Contact</span>
     <h2 class="contact-title" id="contact-heading"></h2>
     <p class="contact-sub" id="contact-sub"></p>
     <div class="contact-grid" id="contact-grid"></div>
     <div class="contact-cta">
-      <a class="btn btn-primary btn-lg" data-bind-attr="href:profile.emailHref">Email me</a>
-      <a class="btn btn-ghost btn-lg" data-bind-attr="href:profile.cvFile">Download CV (PDF)</a>
+      <a class="btn btn-primary btn-lg" data-bind-attr="href:profile.emailHref" data-i18n="emailBtn">Email me</a>
+      <a class="btn btn-ghost btn-lg" data-bind-attr="href:profile.cvFile" data-i18n="downloadBtn">Download CV (PDF)</a>
     </div>
   </div>
 </section>
@@ -853,7 +867,7 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
 <footer class="footer">
   <div class="footer-row">
     <span data-bind="profile.copyright">© 2026 Viktor Kondratsiuk</span>
-    <span>Crafted with care · Last updated April 2026</span>
+    <span data-i18n="footerCredit">Crafted with care · Last updated April 2026</span>
   </div>
 </footer>
 
@@ -1237,6 +1251,18 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
       }
     }
 
+    // ---- UI strings ----
+    var uiSec = getSubsections(sections['UI'] || '');
+    var ui = {};
+    Object.keys(uiSec).forEach(function(sub) {
+      var fields = parseFieldsAndBullets(uiSec[sub]);
+      Object.assign(ui, fields);
+    });
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      if (ui[key] != null) el.textContent = String(ui[key]);
+    });
+
     // ---- Init lang switch + reveal + sticky nav ----
     initLangSwitch();
     initInteractions();
@@ -1246,6 +1272,16 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
   }
 
   function initInteractions() {
+    var scrollTopBtn = document.getElementById('scroll-top');
+    if (scrollTopBtn) {
+      window.addEventListener('scroll', function() {
+        scrollTopBtn.classList.toggle('visible', window.scrollY > 500);
+      }, { passive: true });
+      scrollTopBtn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
     const nav = document.getElementById('topnav');
     const onScroll = () => {
       if (window.scrollY > 8) nav.classList.add('scrolled');
@@ -1289,5 +1325,9 @@ code { font-family: var(--mono); font-size: 0.92em; background: var(--bg-2); pad
 })();
 
 </script>
+
+<button class="scroll-top" id="scroll-top" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+</button>
 </body>
 </html>

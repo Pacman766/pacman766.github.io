@@ -1,6 +1,6 @@
 ---
 # Profile
-name: Виктор Кондрацюк
+name: Виктор Кондратюк
 role: Веб-разработчик
 location: Минск, Беларусь
 email: 3334976@gmail.com
@@ -190,3 +190,38 @@ cvFile: resume.html?lang=ru
 
 ## Subtitle
 Быстрее всего можно связаться по email или Telegram. Обычно отвечаю в течение дня.
+
+# UI
+
+## Nav
+- downloadCV: Скачать резюме
+
+## Hero
+- ctaWork: Смотреть проекты
+- ctaContact: Написать мне
+
+## Kickers
+- kickerAbout: 01 — О себе
+- kickerSkills: 02 — Навыки
+- kickerExperience: 03 — Опыт
+- kickerProjects: 04 — Проекты
+- kickerEducation: 05 — Образование
+- kickerLanguages: 06 — Языки
+- kickerContact: 07 — Контакты
+
+## Sections
+- educationTitle: Образование.
+- languagesTitle: Языки.
+
+## ContactCTA
+- emailBtn: Написать на email
+- downloadBtn: Скачать резюме (PDF)
+
+## Resume
+- toolbarHint: Предпросмотр резюме · A4 · Выберите **«Сохранить как PDF»**, затем отключите **«Колонтитулы»** в настройках
+- backBtn: Вернуться на сайт
+- printBtn: Печать / Сохранить PDF
+- printBtnShort: Сохранить PDF
+
+## Footer
+- footerCredit: Сделано с душой · Обновлено апрель 2026

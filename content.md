@@ -190,3 +190,38 @@ Let's build something.
 
 ## Subtitle
 The fastest way to reach me is email or Telegram. I usually reply within a day.
+
+# UI
+
+## Nav
+- downloadCV: Download CV
+
+## Hero
+- ctaWork: See selected work
+- ctaContact: Get in touch
+
+## Kickers
+- kickerAbout: 01 — About
+- kickerSkills: 02 — Skills
+- kickerExperience: 03 — Experience
+- kickerProjects: 04 — Selected projects
+- kickerEducation: 05 — Education
+- kickerLanguages: 06 — Languages
+- kickerContact: 07 — Contact
+
+## Sections
+- educationTitle: Education.
+- languagesTitle: Languages.
+
+## ContactCTA
+- emailBtn: Email me
+- downloadBtn: Download CV (PDF)
+
+## Resume
+- toolbarHint: Resume preview · A4 · Choose **"Save as PDF"** as destination, then turn off **"Headers and footers"** in More settings
+- backBtn: Back to site
+- printBtn: Print / Save as PDF
+- printBtnShort: Save as PDF
+
+## Footer
+- footerCredit: Crafted with care · Last updated April 2026

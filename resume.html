@@ -360,16 +360,16 @@ em { font-style: italic; }
 <div id="cms-loader">Loading…</div>
 
 <div class="toolbar">
-  <div class="toolbar-left">Resume preview · A4 · Choose <strong>“Save as PDF”</strong> as destination, then turn off <strong>“Headers and footers”</strong> in More settings</div>
-  <div class="toolbar-actions">
-    <a class="tb-btn tb-btn-ghost" href="index.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-      Back to site
+  <div class=”toolbar-left”><span id=”toolbar-hint”>Resume preview · A4 · Choose <strong>”Save as PDF”</strong> as destination, then turn off <strong>”Headers and footers”</strong> in More settings</span></div>
+  <div class=”toolbar-actions”>
+    <a class=”tb-btn tb-btn-ghost” href=”index.html” id=”back-btn”>
+      <svg viewBox=”0 0 24 24” fill=”none” stroke=”currentColor” stroke-width=”2” stroke-linecap=”round” stroke-linejoin=”round”><line x1=”19” y1=”12” x2=”5” y2=”12”/><polyline points=”12 19 5 12 12 5”/></svg>
+      <span data-i18n=”backBtn”>Back to site</span>
     </a>
     <button class="tb-btn tb-btn-primary" id="print-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-      <span class="btn-long">Print / Save as PDF</span>
-      <span class="btn-short">Save as PDF</span>
+      <span class="btn-long" data-i18n="printBtn">Print / Save as PDF</span>
+      <span class="btn-short" data-i18n="printBtnShort">Save as PDF</span>
     </button>
   </div>
 </div>
@@ -629,6 +629,20 @@ em { font-style: italic; }
         ${stack ? `<div class="r-project-stack">${stack}</div>` : ''}
       </div>`;
     }).join('');
+
+    // ---- UI strings ----
+    var uiSec = getSubsections(sections['UI'] || '');
+    var ui = {};
+    Object.keys(uiSec).forEach(function(sub) {
+      var fields = parseFieldsAndBullets(uiSec[sub]);
+      Object.assign(ui, fields);
+    });
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      if (ui[key] != null) el.textContent = String(ui[key]);
+    });
+    var hintEl = document.getElementById('toolbar-hint');
+    if (hintEl && ui.toolbarHint) hintEl.innerHTML = inline(String(ui.toolbarHint));
 
     requestAnimationFrame(() => {
       document.getElementById('cms-loader').classList.add('hide');
