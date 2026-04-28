@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -47,9 +47,11 @@ em { font-style: italic; }
 .toolbar-left {
   font-family: var(--mono); font-size: 11px;
   color: var(--ink-3); letter-spacing: .04em;
+  flex: 1 1 0; min-width: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .toolbar-left strong { color: var(--ink); font-weight: 600; }
-.toolbar-actions { display: flex; gap: 10px; }
+.toolbar-actions { display: flex; gap: 10px; flex-shrink: 0; }
 .tb-btn {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 9px 16px;
@@ -323,6 +325,8 @@ em { font-style: italic; }
   .btn-long { display: none; }
   .btn-short { display: inline; }
   .toolbar-left { display: none; }
+  body { overflow-x: hidden; }
+  .page-wrap { overflow-x: hidden; max-width: 100vw; padding: 16px 0 32px; }
 }
 
 /* ============= PRINT ============= */
@@ -362,7 +366,7 @@ em { font-style: italic; }
 <div class="toolbar">
   <div class=”toolbar-left”><span id=”toolbar-hint”>Resume preview · A4 · Choose <strong>”Save as PDF”</strong> as destination, then turn off <strong>”Headers and footers”</strong> in More settings</span></div>
   <div class=”toolbar-actions”>
-    <a class=”tb-btn tb-btn-ghost” href=”index.html” id=”back-btn”>
+    <a class=”tb-btn tb-btn-ghost” href="index.html" id=”back-btn”>
       <svg viewBox=”0 0 24 24” fill=”none” stroke=”currentColor” stroke-width=”2” stroke-linecap=”round” stroke-linejoin=”round”><line x1=”19” y1=”12” x2=”5” y2=”12”/><polyline points=”12 19 5 12 12 5”/></svg>
       <span data-i18n=”backBtn”>Back to site</span>
     </a>
